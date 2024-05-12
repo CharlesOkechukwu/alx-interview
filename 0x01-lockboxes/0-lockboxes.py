@@ -18,8 +18,6 @@ def canUnlockAll(boxes):
                 for key in box:
                     if key < len(boxes) and key not in box_keys:
                         box_keys.append(key)
-                    elif key >= len(boxes):
-                        return False
     if len(locked) > 0:
         lock_cpy = [i for i in locked]
         for index, value in enumerate(lock_cpy):
@@ -28,8 +26,6 @@ def canUnlockAll(boxes):
                 for key in box:
                     if key < len(boxes) and key not in box_keys:
                         box_keys.append(key)
-                    elif key >= len(boxes):
-                        return False
                 locked.remove(value)
         if len(locked) > 0:
             return False
