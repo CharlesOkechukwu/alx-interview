@@ -30,6 +30,7 @@ def print_logs():
                 pass
             if count % 10 == 0:
                 log_print(file_size, stat_codes)
+                count = 0
     except KeyboardInterrupt:
         log_print(file_size, stat_codes)
         raise
@@ -41,3 +42,6 @@ def log_print(size, codes):
     for key, value in sorted(codes.items()):
         if value:
             print("{}: {}".format(key, value))
+
+if __name__ == "__main__":
+    print_logs()
