@@ -18,17 +18,26 @@ def print_logs():
 
     count = 0
     file_size = 0
-    for line in stdin:
-        count += 1
-        try:
-            data = line.split()
-            file_size += int(data[-1])
-            if data[-2] in stat_codes:
-                stat_codes[data[-2]] += 1
-        except Exception:
-            pass
-        if count % 10 == 0:
-            print("File size: {}".format(file_size))
-            for key, value in sorted(stat_codes.items()):
-                if value:
-                    print("{}: {}".format(key, value))
+    try:
+        for line in stdin:
+            count += 1
+            try:
+                data = line.split()
+                file_size += int(data[-1])
+                if data[-2] in stat_codes:
+                    stat_codes[data[-2]] += 1
+            except Exception:
+                pass
+            if count % 10 == 0:
+                log_print(file_size, stat_codes)
+    except KeyboardInterrupt:
+        log_print(file_size, stat_codes)
+        raise
+
+
+def log_print(size, codes):
+    """print parsed log informations"""
+    print("File size: {}".format(size))
+    for key, value in sorted(codes.items()):
+        if value:
+            print("{}: {}".format(key, value))
